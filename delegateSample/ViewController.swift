@@ -65,6 +65,7 @@ class ViewController: UIViewController {
         
         stackView.spacing = 20.0
         stackView.dataSource = self
+        stackView.delegate = self
     }
 
     @IBAction func updateStackViewTapped(_ sender: UIButton) {
@@ -73,10 +74,6 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: CustomStackViewDataSource {
-    func buttonTappedAt(index: Int) {
-        print("tapped at \(index)")
-    }
-    
     func textForRowAt(index: Int) -> String {
         guard let text = textField.text, !text.isEmpty else {
             return "Default text"
@@ -87,5 +84,11 @@ extension ViewController: CustomStackViewDataSource {
     
     func numberOfRows() -> Int {
         return self.numberOfRowsSegment.selectedSegmentIndex  + 1
+    }
+}
+
+extension ViewController : CustomStackViewDelegate {
+    func buttonTappedAt(index: Int) {
+        print("tapped at \(index)")
     }
 }
